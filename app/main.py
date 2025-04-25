@@ -33,6 +33,9 @@ for iface in interfaces:
     except Exception as e:
         print(f"Error on interface {iface}:", e)
 
+if hotspot_ip:
+    start_dns_server(hotspot_ip)
+
 import uvicorn
 
 app = FastAPI()
