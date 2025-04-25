@@ -35,9 +35,16 @@ class MafiaResolver(BaseResolver):
     def __init__(self, ip):
         self.ip = ip
 
+    # def resolve(self, request, handler):
+    #     reply = request.reply()
+    #     qname = request.q.qname
+    #     if str(qname).endswith("mafia.local."):
+    #         reply.add_answer(RR(qname, QTYPE.A, rdata=A(self.ip), ttl=60))
+    #     return reply
     def resolve(self, request, handler):
         reply = request.reply()
         qname = request.q.qname
+        print(f"Received request for: {qname}")  # Add logging here
         if str(qname).endswith("mafia.local."):
             reply.add_answer(RR(qname, QTYPE.A, rdata=A(self.ip), ttl=60))
         return reply
