@@ -17,12 +17,15 @@ class MafiaResolver(BaseResolver):
             reply.add_answer(RR(qname, QTYPE.A, rdata=A(self.ip), ttl=60))
         return reply
 
-# Replace with your hotspot IP
-hotspot_ip = "192.168.137.1"
-resolver = MafiaResolver(hotspot_ip)
-logger = DNSLogger(prefix=False)
-server = DNSServer(resolver, port=53, address="0.0.0.0", logger=logger)
+def start_dns_server(hotspot_ip: str):
+    # hotspot_ip = "192.168.137.1"
+    resolver = MafiaResolver(hotspot_ip)
+    logger = DNSLogger(prefix=False)
+    server = DNSServer(resolver, port=8000, address="0.0.0.0", logger=logger)
 
-print(f"Starting DNS server for mafia.local → {hotspot_ip}")
-server.start()
+# Replace with your hotspot IP
+    print(f"Starting DNS server for mafia.local → {hotspot_ip}")
+    server.start()
+
+
 
